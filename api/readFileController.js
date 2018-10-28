@@ -28,7 +28,7 @@ exports.readFileData = function (req, res) {
         res.send(err);
       }
 
-      console.log(path);
+      //  console.log(path);
       callback(data);
     });
   }

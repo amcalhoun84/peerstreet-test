@@ -3,7 +3,8 @@ require 'json'
 
 class Client
 
-  @@api_host = "https://damp-plains-53744.herokuapp.com/api/getPopulationData/"
+  ##@@api_host = "https://damp-plains-53744.herokuapp.com/api/getPopulationData/"
+  @@api_host = "http://localhost:5000/api/getPopulationData/"  ## Local Testing
 
   def get_zip
     print "Enter desired zip code (Enter -1 to quit) >> "
@@ -63,10 +64,10 @@ class Client
 
       if pop_2015.to_i > pop_2014.to_i
        growth_percent = ((pop_2015.to_i - pop_2014.to_i).to_f / pop_2014.to_i) * 100
-       puts "\nPopulation Growth ==> " + '%.2f' % growth_percent + "%\n\n"
+       puts "\nPopulation Growth:\t\t" + '%.2f' % growth_percent + "%\n\n"
       elsif pop_2015.to_i < pop_2014.to_i
-        growth_percent = ((pop_2015.to_i - pop_2014.to_i).to_f / pop_2014.to_i) * -100
-        puts "\nPopulation Slough ==> " + '%.2f' % growth_percent + "%\n\n"
+        growth_percent = ((pop_2015.to_i - pop_2014.to_i).to_f / pop_2014.to_i) * 100
+        puts "\nPopulation Loss:\t\t" + '%.2f' % growth_percent + "%\n\n"
       end
     end
   end
@@ -82,11 +83,12 @@ while(true)
     exit(1)
   end
 
-  if zip_code.length < 5
+  if zip_code.length != 5
     puts "Please input a 5 digit zip code."
+  else
+    pop_data_res = client.get_API_data(zip_code)
+    client.show_pop_data(pop_data_res, zip_code)
   end
 
-  pop_data_res = client.get_API_data(zip_code)
-  client.show_pop_data(pop_data_res, zip_code)
 
 end

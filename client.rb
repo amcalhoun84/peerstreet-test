@@ -3,7 +3,7 @@ require 'json'
 
 class Client
 
-  @@api_host = "http://ec2-54-183-155-205.us-west-1.compute.amazonaws.com/api/getPopulationData/"
+  @@api_host = "https://damp-plains-53744.herokuapp.com/api/getPopulationData/"
 
   def get_zip
     print "Enter desired zip code (Enter -1 to quit) >> "
